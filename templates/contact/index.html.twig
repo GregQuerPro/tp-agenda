@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block body %}
+    <h1>{{ contact.prenom }} {{ contact.nom }}</h1>
+    <p class="mt-4"><strong>Age:</strong> {{ contact.age }}</p>
+    <p><strong>Téléphone:</strong> {{ contact.telephone }}</p>
+    <p><strong>Adresse:</strong> {{ contact.adresse }}</p>
+    <p><strong>Ville:</strong> {{ contact.ville }}</p>
+{% endblock %}
