@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use App\Entity\Contact;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -17,7 +18,20 @@ class AppFixtures extends Fixture
         $villes = ['Voisenon', 'Melun', 'Cesson', 'Paris', 'Lille'];
         $ages = ['20', '30', '40', '50', '60'];
 
+        $categoryNames = ['famille', 'amis', 'travaille'];
+        $categories = [];
+
+        for ($b = 0; 3 > $b; $b++) {
+            $category = new Category();
+            $category->setName($categoryNames[$b]);
+            $manager->persist($category);
+            $categories[] = $category;
+        }
+        $manager->flush();
+
+
             for ($a = 0; 5 > $a; $a++) {
+
                 $contact = new Contact();
                 $contact
                     ->setNom($noms[$a])
@@ -25,10 +39,13 @@ class AppFixtures extends Fixture
                     ->setTelephone($telephones[$a])
                     ->setAdresse($adresses[$a])
                     ->setVille($villes[$a])
-                    ->setAge($ages[$a]);
+                    ->setAge($ages[$a])
+                    ->setCategory($categories[rand(0,2)]);
             $manager->persist($contact);
             }
 
         $manager->flush();
     }
+
+
 }
